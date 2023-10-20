@@ -28,10 +28,15 @@ async function listNestedFiles(directoryPath) {
 }
 
 // Usage:
-listNestedFiles('../')
-    .then((files) => {
-        console.log('All files processed:', files);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+await listNestedFiles('../web_spider')
+
+
+
+
+
+    // .then((files) => {
+    //     console.log('All files processed:', files);
+    // })
+    // .catch((error) => {
+    //     console.error(error);
+    // });
