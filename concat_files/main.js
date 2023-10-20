@@ -1,26 +1,33 @@
 import fs from 'fs'
 
-function concatFiles (src, dest) {
-    fs.writeFile(dest, '', err => {
-        if (err) throw err
-    })
-    
-    src.map((file) => {
-        fs.readFile(file, 'utf8', (err, data) => {
-            if (err) throw err
-        fs.appendFile(dest, `${data} \n`, err => {
-            if (err) throw err
+function concatFiles (srcFiles, destinationFile, cb) {
+    const destinationStream = fs.createWriteStream(destinationFile)
 
-            console.log(file, 'appended successfully')
-        })
-    })
-    })
+    function concatenateFile(index) {
+        if (index < srcFiles.length) {
+            const sourceReadStream = fs.createReadStream(srcFiles[index])
+            sourceReadStream.pipe(destinationStream, { end: false })
+
+            sourceReadStream.on('end', () => {
+                destinationStream.write('\n')
+                concatenateFile(index + 1)
+            })
+            sourceReadStream.on('error', error => cb(error))
+        }
+        else {
+            destinationStream.end()
+            cb(null)
+        }
+    }
+    
+    concatenateFile(0)
 }
 
-concatFiles(['fileA.txt', 'fileB.txt', 'fileC.txt'], 'new_file.txt')
-
-fs.unlink('fileB.txt', (err) => {
-    if (err) throw err
-
-    console.log('fileB deleted successfully')
+concatFiles(['file1.txt', 'file2.txt', 'fileC.txt'], 'nile.txt', error => {
+    if (error) {
+        console.error(`Error occured: ${error.message}`)
+    }
+    else {
+        console.log('files concantened successfully')
+    }
 })
