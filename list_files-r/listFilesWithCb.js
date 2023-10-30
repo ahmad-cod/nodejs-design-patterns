@@ -6,7 +6,7 @@ function listNestedFiles(directoryPath, callback) {
         if(error) {
             callback(`Error reading directory path: ${error}`)
         } else {
-            console.log(`Reaing files in ${directoryPath}:`)
+            console.log(`Reading files in ${directoryPath}:`)
 
             function processFile (index) {
                 if (index < files.length) {
