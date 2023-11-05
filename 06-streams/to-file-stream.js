@@ -15,3 +15,13 @@ export class ToFileStream extends Writable {
         .catch(cb)
     }
 }
+
+export const tfs = new Writable({
+    objectMode: true,
+    write (chunk, encoding, cb) {
+        mkdirp(dirname(chunk.path))
+        .then(() => fs.writeFile(chunk.path, chunk.content))
+        .then(() => cb())
+        .catch(cb)
+    }
+})
