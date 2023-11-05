@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs'
 import { Writable } from 'stream'
 import { dirname } from 'path'
-import mkdirp from 'mkdirp-promise'
+import { mkdirp } from 'mkdirp'
 
 export class ToFileStream extends Writable {
     constructor(options) {
