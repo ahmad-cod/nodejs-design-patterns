@@ -1,6 +1,6 @@
-import { ReplaceStream } from "./replaceStream.js"
+import { ReplaceStream, replaceStream } from "./replaceStream.js"
 
-const replaceStream = new ReplaceStream('World', 'Ahmad')
+// const replaceStream = new ReplaceStream('World', 'Ahmad')
 replaceStream.on('data', (chunk) => console.log(chunk.toString()))
 
 replaceStream.write('Hello W')
