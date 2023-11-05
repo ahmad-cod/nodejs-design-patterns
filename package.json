@@ -10,8 +10,10 @@
   "author": "ahmad aroyehun",
   "license": "ISC",
   "dependencies": {
+    "chance": "^1.1.11",
     "cheerio": "^1.0.0-rc.12",
     "mkdirp": "^3.0.1",
+    "mkdirp-promise": "^5.0.1",
     "slug": "^8.2.3",
     "superagent": "^8.1.2"
   }
